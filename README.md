@@ -11,6 +11,14 @@ Live screen viewing in FiveM for administrators, enabling **real-time observatio
   </a>
 </p>
 
+## 📹 Demonstration V2 In Prod
+
+<p align="center">
+  <a href="https://youtu.be/QAnAt_eD2yQ">
+    <img src="https://img.youtube.com/vi/QAnAt_eD2yQ/0.jpg" alt="Vidéo YouTube" width="480"/>
+  </a>
+</p>
+
 ---
 
 ## 🛠 Description
@@ -24,14 +32,33 @@ Unlike delayed screenshot tools or external solutions such as *screenshot-basic*
 
 ---
 
-## 🚧 Project Status
+## ℹ️ Integration with RageUI or RageUI V2
 
-This resource is **still in development** and is **continuously improving**.
+Since the resource is fully encrypted, it is not possible to modify its source code. Integration must therefore be done exclusively through the two main events exposed by the resource, which trigger the watchScreen function.
 
-Planned improvements:
-- Multi-admin viewing support.
-- Better resolution and bandwidth management.
-- Additional in-game moderation tools.
+Instead of using the /watchScreen [targetId] command, you can directly integrate these events into your own scripts — for example with RageUI or RageUI v2. This allows you to provide a more intuitive interface (menu, in-game interaction, etc.).
+
+⚠️ **Important: the original script does not handle any kind of permissions. You must implement your own permission system (for example based on an admin rank, staff job, ACE, etc.) before granting access to this feature.**
+
+```lua
+function DrawMenuPlayerActions()
+    RageUI.IsVisible(RMenu:Get('menu_player_actions', 'main'), function()
+        local playerName = GetPlayerName(NetworkGetPlayerIndexFromPed(GetPlayerPed(GetPlayerFromServerId(selectedPlayerId)))) or "Inconnu"
+        local buttonLabel = isScreenSharing and "Arrêter de regarder d'écran" or "Regarder l'écran"
+        RageUI.Button(buttonLabel, "Regarder ou arrêter l'écran du joueur " .. playerName, {RightLabel = "→"}, true, {
+            onSelected = function()
+                if isScreenSharing then
+                    TriggerServerEvent('admin:stopScreenShare', selectedPlayerId)
+                    isScreenSharing = false
+                else
+                    TriggerServerEvent('admin:requestScreenShare', selectedPlayerId)
+                    isScreenSharing = true
+                end
+            end
+        })
+    end)
+end
+```
 
 ---
 
