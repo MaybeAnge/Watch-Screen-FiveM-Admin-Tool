@@ -3,14 +3,6 @@ Live screen viewing in FiveM for administrators, enabling **real-time observatio
 
 ---
 
-## 📹 Demonstration
-
-<p align="center">
-  <a href="https://youtu.be/FAlQM9gc0AI">
-    <img src="https://img.youtube.com/vi/FAlQM9gc0AI/0.jpg" alt="Vidéo YouTube" width="480"/>
-  </a>
-</p>
-
 ## 📹 Demonstration V2 In Prod
 
 <p align="center">
