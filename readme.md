@@ -3,13 +3,15 @@ Live screen viewing in FiveM for administrators, enabling **real-time observatio
 
 ---
 
-## 📹 Demonstration V2 In Prod
+## 📹 Demonstration
 
 <p align="center">
-  <a href="https://youtu.be/QAnAt_eD2yQ">
-    <img src="https://img.youtube.com/vi/QAnAt_eD2yQ/0.jpg" alt="Vidéo YouTube" width="480"/>
+  <a href="https://youtu.be/NlZDExWIMPs">
+    <img src="https://img.youtube.com/vi/NlZDExWIMPs/0.jpg" alt="Vidéo YouTube" width="480"/>
   </a>
 </p>
+
+More information and purchase: https://discord.com/invite/YcBngexpjr
 
 ---
 
@@ -18,24 +20,15 @@ Live screen viewing in FiveM for administrators, enabling **real-time observatio
 **Watch Screen** is an **advanced FiveM resource** that allows administrators to see a player’s screen **live**, directly from the game, using **WebRTC** technology.
 
 Unlike delayed screenshot tools or external solutions such as *screenshot-basic*, this system offers:
-- **Instant visibility** of the player’s POV.
-- **Ultra-low latency** streaming.
-- **Integration directly into the game world** for maximum immersion and practicality.
+- Performance: The script runs at 0.00 ms, even in action.
+- Security & Discretion: 0% chance of detection by cheaters zero possibility for them to know you are watching them.
+- Compatibility: Works on all frameworks (Standalone, ESX, QBCore, etc.) utilizing ACE permissions.
+- Display: 30 FPS real-time stream. RageUI-style cheats or in-game integrations like DrawText are visible. External cheats like Susano (which use other methods outside the game itself) will not be visible, but everything the cheaters do such as NoClip, Freecam, Aimbot, and much more will be fully visible.
 
 ```lua
-if playerPower >= 200 then
-    local playerName = GetPlayerName(NetworkGetPlayerIndexFromPed(GetPlayerPed(GetPlayerFromServerId(selectedPlayer)))) or "Inconnu"
-    local buttonLabel = isScreenSharing and "Arrêter de regarder d'écran" or "Regarder l'écran"
-    RageUI.Button(buttonLabel, nil, {}, true, {
-        onSelected = function()
-            if isScreenSharing then
-                TriggerServerEvent('admin:stopScreenShare', selectedPlayer)
-                isScreenSharing = false
-            else
-                TriggerServerEvent('admin:requestScreenShare', selectedPlayer)
-                isScreenSharing = true
-            end
-        end
-    })
-end
+RageUI.Button("Watch Player Screen", "Look at the target player's screen.", {}, true, {
+    onSelected = function()
+        TriggerServerEvent('inw:toggle', playerSessionID)
+    end
+})
 ```
